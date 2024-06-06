@@ -1,0 +1,5 @@
+pip install pandas scikit-learn joblib flask spacy
+python -m spacy download en_core_web_sm
+python app.py
+python -m spacy download en_core_web_sm
+python test_nlp.py
