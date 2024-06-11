@@ -10,6 +10,18 @@ inventory_model = joblib.load('models/inventory_model.pkl')
 def index():
     return render_template('index.html')
 
+@app.route('/')
+def prediccion_ventas():
+    return render_template('prediccion_ventas.html')
+
+@app.route('/Menu')
+def Menu():
+    return render_template('Menu.html')
+
+@app.route('/menub')
+def menub():
+    return render_template('menub.html')
+
 @app.route('/predict_inventory', methods=['POST'])
 def predict_inventory():
     data = request.json
