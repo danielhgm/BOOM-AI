@@ -1,102 +1,12 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body {
-  background-color: black;
-  color: white;
-  font-family: sans-serif;
-}
-
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-}
-
-.logo {
-  font-size: 32px;
-  font-weight: bold;
-}
-
-.content {
-  margin-left: 20px;
-}
-
-.content h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.content p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.button {
-  background-color: black;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.social-media {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.social-media a {
-  color: white;
-  text-decoration: none;
-}
-
-.social-media i {
-  font-size: 18px;
-}
-
-.right-side {
-  background-color: white;
-  color: black;
-  padding: 20px;
-  border-radius: 5px;
-}
-
-.right-side h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.right-side p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.user {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: white;
-  color: black;
-  padding: 5px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.user i {
-  font-size: 24px;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='./estilos/index.css') }}">
 </head>
 <body>
+
 <div class="container">
   <div class="logo">
     <h1>Bienvenido a</h1>
@@ -124,6 +34,10 @@ body {
   Read More</p>
 
   <div class="buttons">
+    <button onclick="location.href='/prediccion_ventas'">Ir a Predicción de Ventas</button>
+    <button onclick="location.href='/Menu'">Menu</button>
+    <button onclick="location.href='/menub'">Menub</button>
+
     <a href="prediccion_ventas.html"><button class="button">Prediccion de ventas</button></a>
     <a href="Menu.html"><button class="button">Menu</button></a>
     <a href="menub.html"><button class="button">Menu b</button></a>
