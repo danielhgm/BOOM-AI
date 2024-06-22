@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from PIL import Image
 import pytesseract
 import re
+import os
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
@@ -24,10 +25,14 @@ clf_fraud = IsolationForest(contamination=0.1)
 clf_fraud.fit(amounts)
 
 def extract_text(image_path):
-    img = Image.open(image_path)
-    text = pytesseract.image_to_string(img)
-    print("Texto extraído:", text)  # Imprime el texto extraído para depurar
-    return text
+    try:
+        img = Image.open(image_path)
+        text = pytesseract.image_to_string(img, lang='spa')
+        print("Texto extraído:", text)  # Imprime el texto extraído para depurar
+        return text
+    except Exception as e:
+        print(f"Error al extraer texto: {e}")
+        return ""
 
 def parse_invoice(text):
     data = {}
@@ -71,7 +76,8 @@ def upload_file():
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
     if file:
-        file_path = f'uploads/{file.filename}'
+        file_path = os.path.join('uploads', file.filename)
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
         file.save(file_path)
         text = extract_text(file_path)
         
@@ -81,8 +87,13 @@ def upload_file():
         data = parse_invoice(text)
         print("Datos parseados:", data)
         
-        data['category'] = classify_expense(data['description'])
-        data['fraud'] = "Yes" if detect_fraud(float(data['total'])) == -1 else "No"
+        if data['description'] != "Descripción no encontrada" and data['total'] != "Total no encontrado":
+            data['category'] = classify_expense(data['description'])
+            data['fraud'] = "Yes" if detect_fraud(float(data['total'])) == -1 else "No"
+        else:
+            data['category'] = "Categoría no encontrada"
+            data['fraud'] = "No se pudo determinar"
+
         print("Datos finales:", data)
         
         return jsonify(data)
