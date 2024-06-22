@@ -1,102 +1,70 @@
-from flask import Flask, request, jsonify, render_template
-from PIL import Image
-import pytesseract
-import re
 import os
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.ensemble import IsolationForest
+import pytesseract
+from PIL import Image
+from flask import Flask, request, render_template, redirect, url_for
+from sqlalchemy import create_engine, Column, Integer, String, Table, MetaData
+from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.exc import SQLAlchemyError
 
 app = Flask(__name__)
 
-# Inicialización del modelo de clasificación de gastos
-invoices = ["Compra de suministros de oficina", "Pago de servicios de internet", "Compra de equipos de computo"]
-categories = ["Office Supplies", "Internet Services", "Computer Equipment"]
-vectorizer = TfidfVectorizer()
-X = vectorizer.fit_transform(invoices)
-clf_expense = MultinomialNB()
-clf_expense.fit(X, categories)
+# Configuración de la base de datos
+DATABASE_URL = 'sqlite:///facturas.db'
+engine = create_engine(DATABASE_URL)
+Base = declarative_base()
+Session = sessionmaker(bind=engine)
+session = Session()
 
-# Inicialización del modelo de detección de fraudes
-amounts = [120, 80, 50, 30, 10000]
-amounts = pd.DataFrame(amounts, columns=['amount'])
-clf_fraud = IsolationForest(contamination=0.1)
-clf_fraud.fit(amounts)
+# Definición del modelo de la base de datos
+class Factura(Base):
+    __tablename__ = 'facturas'
+    id = Column(Integer, primary_key=True)
+    titulo = Column(String, nullable=False)
+    dato = Column(String, nullable=False)
 
-def extract_text(image_path):
-    try:
-        img = Image.open(image_path)
-        text = pytesseract.image_to_string(img, lang='spa')
-        print("Texto extraído:", text)  # Imprime el texto extraído para depurar
-        return text
-    except Exception as e:
-        print(f"Error al extraer texto: {e}")
-        return ""
+Base.metadata.create_all(engine)
 
-def parse_invoice(text):
-    data = {}
-    # Corrección en las expresiones regulares para capturar correctamente los datos
-    match_date = re.search(r'Fecha:\s*(\d{2}/\d{2}/\d{4})', text)
-    if match_date:
-        data['date'] = match_date.group(1)
-    else:
-        data['date'] = "Fecha no encontrada"  # Manejo de errores
-
-    match_total = re.search(r'Total:\s+\$?(\d+\.\d{2})', text)
-    if match_total:
-        data['total'] = match_total.group(1)
-    else:
-        data['total'] = "Total no encontrado"  # Manejo de errores
-
-    match_description = re.search(r'Descripción:\s+(.*)', text)
-    if match_description:
-        data['description'] = match_description.group(1)
-    else:
-        data['description'] = "Descripción no encontrada"  # Manejo de errores
-
-    return data
-
-def classify_expense(description):
-    X_new = vectorizer.transform([description])
-    return clf_expense.predict(X_new)[0]
-
-def detect_fraud(amount):
-    return clf_fraud.predict([[amount]])[0]
-
+# Ruta para la página de inicio
 @app.route('/')
-def home():
-    return render_template('index.html')
+def index():
+    try:
+        facturas = session.query(Factura).all()
+    except SQLAlchemyError as e:
+        return str(e)
+    return render_template('index.html', facturas=facturas)
 
+# Ruta para subir y procesar la factura
 @app.route('/upload', methods=['POST'])
-def upload_file():
+def upload():
     if 'file' not in request.files:
-        return jsonify({"error": "No file part"}), 400
+        return 'No file part'
     file = request.files['file']
     if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
+        return 'No selected file'
     if file:
-        file_path = os.path.join('uploads', file.filename)
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-        file.save(file_path)
-        text = extract_text(file_path)
-        
-        # Debugging prints
-        print("Texto extraído:", text)
-        
-        data = parse_invoice(text)
-        print("Datos parseados:", data)
-        
-        if data['description'] != "Descripción no encontrada" and data['total'] != "Total no encontrado":
-            data['category'] = classify_expense(data['description'])
-            data['fraud'] = "Yes" if detect_fraud(float(data['total'])) == -1 else "No"
-        else:
-            data['category'] = "Categoría no encontrada"
-            data['fraud'] = "No se pudo determinar"
+        try:
+            image = Image.open(file)
+            text = pytesseract.image_to_string(image)
+            process_text(text)
+            return redirect(url_for('index'))
+        except Exception as e:
+            return str(e)
 
-        print("Datos finales:", data)
-        
-        return jsonify(data)
+def process_text(text):
+    lines = text.split('\n')
+    for line in lines:
+        if ':' in line:
+            titulo, dato = line.split(':', 1)
+            titulo = titulo.strip()
+            dato = dato.strip()
+            if titulo and dato:
+                factura = Factura(titulo=titulo, dato=dato)
+                session.add(factura)
+    try:
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        raise e
 
 if __name__ == '__main__':
     app.run(debug=True)

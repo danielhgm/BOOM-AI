@@ -1,60 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Facturación con Machine Learning</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Facturas Escaneadas</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Subir Factura</h1>
-        <form id="uploadForm" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="file">Seleccionar archivo de factura:</label>
-                <input type="file" class="form-control-file" id="file" name="file" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Subir</button>
-        </form>
-
-        <div id="result" class="mt-5" style="display: none;">
-            <h2>Resultado del Procesamiento</h2>
-            <p><strong>Fecha:</strong> <span id="date"></span></p>
-            <p><strong>Total:</strong> <span id="total"></span></p>
-            <p><strong>Descripción:</strong> <span id="description"></span></p>
-            <p><strong>Categoría:</strong> <span id="category"></span></p>
-            <p><strong>Fraude:</strong> <span id="fraud"></span></p>
-        </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#uploadForm').on('submit', function(event) {
-                event.preventDefault();
-                
-                var formData = new FormData(this);
-                
-                $.ajax({
-                    url: '/upload',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-                        $('#result').show();
-                        $('#date').text(data.date);
-                        $('#total').text(data.total);
-                        $('#description').text(data.description);
-                        $('#category').text(data.category);
-                        $('#fraud').text(data.fraud);
-                    },
-                    error: function() {
-                        alert('Error al procesar la factura');
-                    }
-                });
-            });
-        });
-    </script>
+    <h1>Facturas Escaneadas</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Dato</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.titulo }}</td>
+                <td>{{ factura.dato }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
