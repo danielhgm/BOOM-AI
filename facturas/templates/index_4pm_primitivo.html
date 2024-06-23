@@ -10,12 +10,14 @@
         <input type="file" name="file">
         <input type="submit" value="Upload">
     </form>
-    <table border="1">
+    <form action="/delete_all" method="post" style="margin-top: 20px;">
+        <input type="submit" value="Eliminar Todas las Facturas">
+    </form>
+    <table border="1" style="margin-top: 20px;">
         <thead>
             <tr>
                 <th>Título</th>
                 <th>Dato</th>
-                <th>Modificar</th>
             </tr>
         </thead>
         <tbody>
@@ -23,13 +25,6 @@
             <tr>
                 <td>{{ factura.titulo }}</td>
                 <td>{{ factura.dato }}</td>
-                <td>
-                    <form action="/update/{{ factura.id }}" method="post">
-                        <input type="text" name="titulo" value="{{ factura.titulo }}">
-                        <input type="text" name="dato" value="{{ factura.dato }}">
-                        <input type="submit" value="Guardar">
-                    </form>
-                </td>
             </tr>
             {% endfor %}
         </tbody>

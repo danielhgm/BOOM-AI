@@ -62,6 +62,16 @@ def upload():
         except Exception as e:
             return str(e)
 
+@app.route('/delete_all', methods=['POST'])
+def delete_all():
+    try:
+        session.query(Factura).delete()
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        return str(e)
+    return redirect(url_for('index'))
+
 def process_text(text):
     lines = text.split('\n')
     for line in lines:
