@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facturas Escaneadas</title>
+</head>
+<body>
+    <h1>Facturas Escaneadas</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Dato</th>
+                <th>Modificar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factura in facturas %}
+            <tr>
+                <td>{{ factura.titulo }}</td>
+                <td>{{ factura.dato }}</td>
+                <td>
+                    <form action="/update/{{ factura.id }}" method="post">
+                        <input type="text" name="titulo" value="{{ factura.titulo }}">
+                        <input type="text" name="dato" value="{{ factura.dato }}">
+                        <input type="submit" value="Guardar">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
