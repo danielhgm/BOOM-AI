@@ -21,13 +21,8 @@ session = Session()
 class Factura(Base):
     __tablename__ = 'facturas'
     id = Column(Integer, primary_key=True)
-    fecha = Column(String, nullable=False)
-    descripcion = Column(String, nullable=False)
-    importe = Column(String, nullable=False)
-    hora = Column(String, nullable=False)
-    emisor = Column(String, nullable=False)
-    folio = Column(String, nullable=False)
-    beneficiario = Column(String, nullable=False)
+    titulo = Column(String, nullable=False)
+    dato = Column(String, nullable=False)
 
 Base.metadata.create_all(engine)
 
@@ -39,17 +34,6 @@ def index():
     except SQLAlchemyError as e:
         return str(e)
     return render_template('index.html', facturas=facturas)
-
-# Ruta para borrar todos los registros de la base de datos
-@app.route('/delete_all', methods=['POST'])
-def delete_all():
-    try:
-        session.query(Factura).delete()
-        session.commit()
-    except SQLAlchemyError as e:
-        session.rollback()
-        return str(e)
-    return redirect(url_for('index'))
 
 # Ruta para subir y procesar la factura
 @app.route('/upload', methods=['POST'])
@@ -65,72 +49,44 @@ def upload():
             img = cv2.imdecode(np.frombuffer(file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
-
+            
             # Convertir imagen preprocesada de OpenCV a formato PIL
             image_pil = Image.fromarray(gray)
-
+            
             # Aplicar OCR con Tesseract a la imagen preprocesada
             custom_config = r'--oem 3 --psm 6 -l spa'
             text = pytesseract.image_to_string(image_pil, config=custom_config)
-
-            # Separar texto por cada factura detectada
-            facturas_texto = separar_facturas(text)
-
-            # Procesar cada factura detectada
-            for factura_texto in facturas_texto:
-                process_text(factura_texto)
-
+            
+            process_text(text)
             return redirect(url_for('index'))
         except Exception as e:
             return str(e)
 
-def process_text(text):
-    fecha = descripcion = importe = hora = emisor = folio = beneficiario = "no especifica"
+@app.route('/delete_all', methods=['POST'])
+def delete_all():
+    try:
+        session.query(Factura).delete()
+        session.commit()
+    except SQLAlchemyError as e:
+        session.rollback()
+        return str(e)
+    return redirect(url_for('index'))
 
+def process_text(text):
     lines = text.split('\n')
     for line in lines:
         if ':' in line:
-            key, value = line.split(':', 1)
-            key = key.strip().lower()
-            value = value.strip()
-            if key == 'fecha':
-                fecha = value
-            elif key == 'descripción' or key == 'motivo':
-                descripcion = value
-            elif key == 'importe total' or key == 'cantidad total':
-                importe = value
-            elif key == 'hora':
-                hora = value
-            elif key == 'nombre del emisor':
-                emisor = value
-            elif key == 'folio':
-                folio = value
-            elif key == 'beneficiario' or key == 'receptor':
-                beneficiario = value
-
+            titulo, dato = line.split(':', 1)
+            titulo = titulo.strip()
+            dato = dato.strip()
+            if titulo and dato:
+                factura = Factura(titulo=titulo, dato=dato)
+                session.add(factura)
     try:
-        factura = Factura(fecha=fecha, descripcion=descripcion, importe=importe, hora=hora,
-                          emisor=emisor, folio=folio, beneficiario=beneficiario)
-        session.add(factura)
         session.commit()
     except SQLAlchemyError as e:
         session.rollback()
         raise e
-
-def separar_facturas(text):
-    # Separar el texto en partes correspondientes a cada factura
-    facturas_texto = []
-    lines = text.split('\n')
-    factura_actual = []
-    for line in lines:
-        if ':' in line:
-            factura_actual.append(line)
-        elif factura_actual:
-            facturas_texto.append('\n'.join(factura_actual))
-            factura_actual = []
-    if factura_actual:
-        facturas_texto.append('\n'.join(factura_actual))
-    return facturas_texto
 
 if __name__ == '__main__':
     app.run(debug=True)

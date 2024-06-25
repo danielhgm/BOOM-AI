@@ -6,35 +6,25 @@
 </head>
 <body>
     <h1>Facturas Escaneadas</h1>
-    <form action="/delete_all" method="post">
-        <input type="submit" value="Borrar todos los registros">
-    </form>
     <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file">
         <input type="submit" value="Upload">
     </form>
-    <table border="1">
+    <form action="/delete_all" method="post" style="margin-top: 20px;">
+        <input type="submit" value="Eliminar Todas las Facturas">
+    </form>
+    <table border="1" style="margin-top: 20px;">
         <thead>
             <tr>
-                <th>Fecha</th>
-                <th>Descripción o Motivo</th>
-                <th>Importe</th>
-                <th>Hora</th>
-                <th>Nombre del Emisor</th>
-                <th>Folio</th>
-                <th>Beneficiario o Receptor</th>
+                <th>Título</th>
+                <th>Dato</th>
             </tr>
         </thead>
         <tbody>
             {% for factura in facturas %}
             <tr>
-                <td>{{ factura.fecha }}</td>
-                <td>{{ factura.descripcion }}</td>
-                <td>{{ factura.importe }}</td>
-                <td>{{ factura.hora }}</td>
-                <td>{{ factura.emisor }}</td>
-                <td>{{ factura.folio }}</td>
-                <td>{{ factura.beneficiario }}</td>
+                <td>{{ factura.titulo }}</td>
+                <td>{{ factura.dato }}</td>
             </tr>
             {% endfor %}
         </tbody>
