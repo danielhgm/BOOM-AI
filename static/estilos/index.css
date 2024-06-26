@@ -1,92 +1,175 @@
 body {
-    background-color: black;
-    color: white;
-    font-family: sans-serif;
-  }
-  
-  .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .logo {
-    font-size: 32px;
-    font-weight: bold;
-  }
-  
-  .content {
-    margin-left: 20px;
-  }
-  
-  .content h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .content p {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
-  .buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .button {
-    background-color: black;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .social-media {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .social-media a {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .social-media i {
-    font-size: 18px;
-  }
-  
-  .right-side {
-    background-color: white;
-    color: black;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .right-side h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .right-side p {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
-  .user {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: white;
-    color: black;
-    padding: 5px 10px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  .user i {
-    font-size: 24px;
-  }
+  background-color: black;
+  color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.5s, color 0.5s;
+}
+nav {
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+nav .right-menu {
+  display: flex;
+  align-items: center;
+}
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+nav ul li {
+  margin: 0 10px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+.login {
+  margin-left: auto;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+}
+.content {
+  text-align: center;
+  padding: 20px;
+}
+.content h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.content p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.social-media {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.social-media a {
+  color: white;
+  text-decoration: none;
+}
+.social-media i {
+  font-size: 18px;
+}
+.right-side {
+  background-color: white;
+  color: black;
+  padding: 20px;
+  border-radius: 5px;
+  transition: background-color 0.5s, color 0.5s;
+}
+/* Definición de los estilos para dark-mode */
+.dark-mode {
+  background-color: #111;
+  color: white;
+}
+
+/* Definición de los estilos para light-mode */
+.light-mode {
+  background-color: white;
+  color: black;
+}
+.right-side h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.right-side p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.user {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.user i {
+  font-size: 24px;
+}
+.contrast-button {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.5s, color 0.5s;
+}
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  margin-right: auto;
+}
+.openbtn:hover {
+  background-color: #444;
+}
