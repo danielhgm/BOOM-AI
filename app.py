@@ -8,7 +8,7 @@ inventory_model = joblib.load('models/inventory_model.pkl')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index2.html')
 
 @app.route('/prediccion_ventas')
 def prediccion_ventas():

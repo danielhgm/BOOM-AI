@@ -8,7 +8,7 @@ body {
   padding: 0;
   transition: background-color 0.5s, color 0.5s;
   /* Añadir la imagen de fondo */
-  background-image: url('../img/background_img1.jpg');
+  background-image: url('../img/background_img2.gif');
   background-size: cover; /* Para cubrir todo el fondo */
   background-position: center; /* Posición centrada */
   animation: moveBackground 30s linear infinite; /* Animación de movimiento */
@@ -39,6 +39,29 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+}
+
+/* Definición de los estilos para dark-mode */
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+/* Definición de los estilos para light-mode */
+.light-mode {
+  background-color: white;
+  color: black;
+}
+/* Boton para cambiar el contraste de la pagina */
+.contrast-button {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.5s, color 0.5s;
+
 }
 
 /*Estilos del boton menu cuando esta cerrado*/
