@@ -3,12 +3,12 @@
 body {
   background-color: black;
   color: white;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   transition: background-color 0.5s, color 0.5s;
   /* Añadir la imagen de fondo */
-  background-image: url('../img/background_img2.gif');
+  background-image: url('../img/backgroundimg3.jpg');
   background-size: cover; /* Para cubrir todo el fondo */
   background-position: center; /* Posición centrada */
   animation: moveBackground 30s linear infinite; /* Animación de movimiento */
@@ -23,14 +23,6 @@ body {
   }
 }
 
-
-/* Contenido principal */
-#main {
-  margin-left: 0;
-  transition: margin-left 0.5s;
-  padding: 20px;
-}
-
 /* Barra nav de hasta arriba */
 nav {
   background-color: transparent;
@@ -39,29 +31,24 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  position: fixed; /* Mantiene la barra fija en la parte superior */
+  top: 0; /* Fija la barra en la parte superior de la ventana */
+  width: 100%; /* Asegura que la barra ocupe todo el ancho de la ventana */
 }
 
-/* Definición de los estilos para dark-mode */
-.dark-mode {
-  background-color: black;
+/* Estilos del login top menu*/
+
+.menu a{
+  padding: 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
   color: white;
+  display: inline-block;
+  transition: 0.3s;
 }
-/* Definición de los estilos para light-mode */
-.light-mode {
-  background-color: white;
-  color: black;
-}
-/* Boton para cambiar el contraste de la pagina */
-.contrast-button {
-  background-color: white;
-  color: black;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.5s, color 0.5s;
 
+.menu a:hover  {
+  color: #00ffff;
 }
 
 /*Estilos del boton menu cuando esta cerrado*/
@@ -73,9 +60,14 @@ nav {
   padding: 10px 15px;
   border: none;
   margin-right: auto;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 .openbtn:hover {
   background-color: #00ffff;
+  transition: 0.6s;
 }
 
 /* Estilos del side bar menu cuando esta abierto*/
@@ -106,26 +98,60 @@ nav {
 .sidenav a:hover {
   color: #00ffff;
   background-color: #000000;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  
 }
 .sidenav .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
   font-size: 36px;
-  margin-left: 50px;
+  margin-left: 25px;
 }
 
-/* Estilos del login top menu*/
+/* Contenido principal */
+#main {
+  margin-top: 80px; /* Ajusta el margen superior según el tamaño de tu barra de navegación */
+  padding: 40px;
+  text-align: center; /* Centrar el contenido */
+  transition: opacity 0.5s ease; /* Transición suave de opacidad */
+  font-family: 'Roboto', sans-serif; /* Fuente elegante */
+}
 
-.login a{
-  padding: 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: white;
+.container:hover {
+  opacity: 0; /* Hace que el contenedor desaparezca al 0% de opacidad */
+}
+
+#main h1 {
+  font-size: 3rem; /* Tamaño grande para los títulos */
+  margin-bottom: 20px;
+}
+
+#main p {
+  font-size: 1.5rem; /* Tamaño del texto */
+  line-height: 1.6; /* Espaciado de línea */
+}
+
+#main .button {
   display: inline-block;
-  transition: 0.3s;
+  padding: 12px 24px;
+  background-color: #00b894; /* Color de fondo del botón */
+  color: #ffffff; /* Color de texto del botón */
+  text-decoration: none;
+  border-radius: 25px; /* Bordes redondeados */
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.login a:hover  {
-  color: #00ffff;
+#main .button:hover {
+  background-color: #00cec9; /* Color de fondo del botón al pasar el mouse */
+  color: #ffffff; /* Color de texto del botón al pasar el mouse */
+}
+
+@media (max-width: 768px) {
+  #main {
+    padding: 10vw; /* Ajustes para pantallas más pequeñas */
+  }
 }
