@@ -1,14 +1,10 @@
-/* Estilos del side bar menu*/
-
 body {
-  background-color: black;
-  color: white;
-  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  transition: background-color 0.5s, color 0.5s;
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff; /* Color de fondo base */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2300000" fill-opacity="1" d="M0,96L48,117.3C96,139,192,181,288,176C384,171,480,117,576,128C672,139,768,213,864,229.3C960,245,1056,203,1152,165.3C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>'); /* SVG para el patrón de olas */
   /* Añadir la imagen de fondo */
-  background-image: url('../img/backgroundimg3.jpg');
   background-size: cover; /* Para cubrir todo el fondo */
   background-position: center; /* Posición centrada */
   animation: moveBackground 30s linear infinite; /* Animación de movimiento */
@@ -25,16 +21,19 @@ body {
 
 /* Barra nav de hasta arriba */
 nav {
-  background-color: transparent;
-  color: white;
+  background-color:  hwb(0 13% 87% / 0.99);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   position: fixed; /* Mantiene la barra fija en la parte superior */
   top: 0; /* Fija la barra en la parte superior de la ventana */
-  width: 100%; /* Asegura que la barra ocupe todo el ancho de la ventana */
+  width: 98%; /* Asegura que la barra ocupe todo el ancho de la ventana */
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  z-index: 900; /*  */
 }
+
 
 /* Estilos del login top menu*/
 
@@ -42,7 +41,7 @@ nav {
   padding: 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: white;
+  color: rgb(255, 255, 255);
   display: inline-block;
   transition: 0.3s;
 }
@@ -76,7 +75,7 @@ nav {
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   top: 0;
   left: 0;
   background-color: #111;
@@ -117,7 +116,7 @@ nav {
   margin-top: 80px; /* Ajusta el margen superior según el tamaño de tu barra de navegación */
   padding: 40px;
   text-align: center; /* Centrar el contenido */
-  transition: opacity 0.5s ease; /* Transición suave de opacidad */
+  transition: 0.5s ease-in; /* Transición */
   font-family: 'Roboto', sans-serif; /* Fuente elegante */
 }
 
@@ -126,13 +125,21 @@ nav {
 }
 
 #main h1 {
+  text-align: center; 
   font-size: 3rem; /* Tamaño grande para los títulos */
+  margin-bottom: 20px;
+}
+
+#main h2 {
+  text-align: center; 
+  font-size: 2.5rem; /* Tamaño grande para los títulos */
   margin-bottom: 20px;
 }
 
 #main p {
   font-size: 1.5rem; /* Tamaño del texto */
   line-height: 1.6; /* Espaciado de línea */
+  text-align: center;
 }
 
 #main .button {
@@ -154,4 +161,47 @@ nav {
   #main {
     padding: 10vw; /* Ajustes para pantallas más pequeñas */
   }
+}
+
+/* Logo, frase promocional, imgs Trabajos --->Parte 1*/
+
+.quehacemos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Tres columnas iguales */
+  height: 100%;
+ 
+}
+.section {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section:nth-child(1) {
+  
+}
+.section:nth-child(2) {
+
+}
+.section:nth-child(3) {
+
+}
+
+/* Clase highlight para bordes en los textos*/
+
+.highlight {
+  padding: 10px; /* Espacio interno alrededor del texto */
+  border: 2px solid #ffffff; /* Grosor y color del borde */
+  border-radius: 15px; /* Bordes redondeados */
+  background-color: #ffffff; /* Color de fondo del cuadro */
+  margin: 0 200px; /* Margen externo opcional */
+  display: inline-block; /* Mantener el borde alrededor del texto */
+  box-shadow: 0 4px 8px rgba(0, 206, 201, 1); /* Sombra para dar un efecto de elevación */
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transición suave para el hover */
+  z-index: 800; /* Asegura que esté detrás de la barra de navegación */
+}
+
+.highlight:hover {
+  box-shadow: 0 8px 16px rgba(0, 206, 201, 0.2), 0 0 20px rgba(0, 206, 201, 0.4);/* Sombra más grande al pasar el mouse */
+  transform: scale(1.05) rotate(5deg); /* Agrandar ligeramente el cuadro y aplicar rotación */
 }

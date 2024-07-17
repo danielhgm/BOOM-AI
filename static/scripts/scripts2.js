@@ -18,5 +18,19 @@ function closeNav() {
     document.getElementById("main").style.marginLeft = "0";
 }
 
+//Nav var al deslizar hacia abajo
 
+window.addEventListener('scroll', function() {
+    document.body.classList.toggle('scrolled', window.scrollY > 50);
+    });
 
+window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
+    if (window.scrollY > 0) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  //Desvanecimiento de .quehacemos al momento de scroll hacia abajo
