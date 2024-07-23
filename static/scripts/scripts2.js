@@ -33,4 +33,4 @@ window.addEventListener('scroll', function() {
     }
   });
 
-  //Desvanecimiento de .quehacemos al momento de scroll hacia abajo
+  //Añadir nueva funcion

@@ -12,15 +12,12 @@
 
 <body>
 
-    <!-- Menú de navegación -->
+    <!-- nav de navegación -->
     <nav>
         <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>
         <div class="menu">
-            <a href="#quehacemos">¿Qué hacemos?</a>
             <a href="{{ url_for('servicios') }}">Servicios</a>
-            <a href="#portafolio">Portafolio</a>
-            <a href="#dudas">Dudas</a>
-            <a href="#tu empresa">Tu empresa</a>
+            <a href="{{ url_for('index') }}"><i class="fas fa-arrow-left"></i></a>
             <a href="#login"><i class="fas fa-user"></i></a>
         </div>
     </nav>
@@ -41,7 +38,7 @@
     <div id="main">
 
         <!-- Contenido principal -->
-       
+       <!--
             <div class="quehacemos">
                 <div class="section">Logo de la empresa
                     
@@ -56,20 +53,24 @@
                 
                     
             </div>
-            
+            -->
+
+
             <div class="highlight">
-                <h2>¿Que hacemos?</h2>
-                <p>En BOOM AI nos dedicamos a mejorar los negocios a través del uso de tecnología moderna;
-                    actualmente manejamos Computer Vision y Algoritmos de Inteligencia Artificial. Ofrecemos
-                    soluciones personalizadas para cada cliente, asegurando un crecimiento constante y sostenible.</p>
+                <h2>Gestion de productos</h2>
+                <p>A continuacion, usar el escaner para subir el codigo de barras
+                    de los productos y descodificarlo.
+                </p>
             </div>
 
             <h1></h1>
 
             <div class="highlight">
-                <h2>Servicios</h2>
+                <h2>Escáner de Código de Barras</h2>
             </div>
-
+            <div>
+                <img src="{{ url_for('video_feed') }}" width="100%">
+            </div>
 
 
             <h1>s</h1>

@@ -192,7 +192,7 @@ nav {
 
 }
 
-/* Clase highlight para bordes en los textos*/
+/* Clase highlight para bordes en los textos en diagonal*/
 
 .highlight {
   padding: 10px; /* Espacio interno alrededor del texto */
@@ -204,9 +204,13 @@ nav {
   box-shadow: 0 4px 8px rgba(0, 206, 201, 1); /* Sombra para dar un efecto de elevación */
   transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transición suave para el hover */
   z-index: 800; /* Asegura que esté detrás de la barra de navegación */
+  transform: translateZ(0); /* Optimización para la claridad del texto */
+  backface-visibility: hidden; /* Optimización para la claridad del texto */
+  will-change: transform; /* Optimización para la claridad del texto */
 }
 
 .highlight:hover {
-  box-shadow: 0 8px 16px rgba(0, 206, 201, 0.2), 0 0 20px rgba(0, 206, 201, 0.4);/* Sombra más grande al pasar el mouse */
+  box-shadow: 0 8px 16px rgba(0, 206, 201, 0.2), 0 0 20px rgba(0, 206, 201, 0.4); /* Sombra más grande al pasar el mouse */
   transform: scale(1.05) rotate(5deg); /* Agrandar ligeramente el cuadro y aplicar rotación */
+  
 }
