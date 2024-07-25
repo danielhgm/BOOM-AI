@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOM AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/tuempresa.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>
+        <div class="menu">
+            <a href="#quehacemos">¿Qué hacemos?</a>
+            <a href="{{ url_for('servicios') }}">Servicios</a>
+            <a href="#portafolio">Portafolio</a>
+            <a href="#dudas">Dudas</a>
+            <a href="{{ url_for('tuempresa') }}">Tu empresa</a>
+            <a href="#login"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Menú lateral -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/Gestion_de_productos">Predicción de Ventas</a>
+        <a href="/proveedores">Proveedores</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/reportes">Reportes</a>
+        <a href="/ajustes">Ajustes</a>
+    </div>
+
+</div>
+
+
+    <div id="main">
+
+        <!-- Contenido principal -->
+
+            
+            <div class="highlight">
+                <h2>Selecciona tu empresa</h2>
+            
+
+<div class="section">
+<h2>Estancia de vida</h2>
+<br>
+<src ref=""></src>
+</div>
+<div class="section">
+    
+</div>
+<div class="section">
+    
+</div>
+<div class="section">
+    
+</div>
+
+            </div>
+
+
+    </div>
+
+
+            
+
+        
+    
+      <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOOM AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/index2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <!-- nav de navegación -->
+    <nav>
+        <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>
+        <div class="menu">
+            <a href="{{ url_for('servicios') }}">Servicios</a>
+            <a href="{{ url_for('index') }}"><i class="fas fa-arrow-left"></i></a>
+            <a href="#login"><i class="fas fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Menú lateral -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="/Gestion_de_productos">Predicción de Ventas</a>
+        <a href="/proveedores">Proveedores</a>
+        <a href="/clientes">Clientes</a>
+        <a href="/reportes">Reportes</a>
+        <a href="/ajustes">Ajustes</a>
+    </div>
+
+</div>
+
+
+    <div id="main">
+            <style>
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid black;
+                    text-align: center;
+                    padding: 5px;
+                }
+                .header {
+                    text-align: left;
+                    padding: 10px;
+                }
+                .time-col {
+                    background-color: #f2c94c;
+                }
+                .shift {
+                    writing-mode: vertical-rl;
+                    transform: rotate(180deg);
+                    text-align: center;
+                    padding: 50px;
+                }
+                .indications {
+                    height: 150px;
+                }
+            </style>
+        <body>
+            <form>
+                <table>
+                    <tr>
+                        <td class="header">Nombre: <input type="text" name="nombre"></td>
+                        <td class="header">Diagnóstico: <input type="text" name="diagnostico"></td>
+                        <td class="header">Edad: <input type="text" name="edad"></td>
+                        <td class="header">Fecha: Día <input type="text" name="dia" size="2"> Mes <input type="text" name="mes" size="2"> Año <input type="text" name="anio" size="4"></td>
+                    </tr>
+                </table>
+        
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>08:00 a.m.</th>
+                            <th>09:00 a.m.</th>
+                            <th>10:00 a.m.</th>
+                            <th>11:00 a.m.</th>
+                            <th>12:00 p.m.</th>
+                            <th>13:00 p.m.</th>
+                            <th>14:00 p.m.</th>
+                            <th>15:00 p.m.</th>
+                            <th>16:00 p.m.</th>
+                            <th>17:00 p.m.</th>
+                            <th>18:00 p.m.</th>
+                            <th>19:00 p.m.</th>
+                            <th>20:00 p.m.</th>
+                            <th>21:00 p.m.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Alimentos</td>
+                            <td colspan="14"><input type="text" name="alimentos"></td>
+                        </tr>
+                        <tr>
+                            <td>Agua</td>
+                            <td colspan="14"><input type="text" name="agua"></td>
+                        </tr>
+                        <tr>
+                            <td>Colación</td>
+                            <td colspan="14"><input type="text" name="colacion"></td>
+                        </tr>
+                        <tr>
+                            <td>Evacuaciones</td>
+                            <td colspan="14"><input type="text" name="evacuaciones"></td>
+                        </tr>
+                        <tr>
+                            <td>Orina</td>
+                            <td colspan="14"><input type="text" name="orina"></td>
+                        </tr>
+                        <tr>
+                            <td>Vómito</td>
+                            <td colspan="14"><input type="text" name="vomito"></td>
+                        </tr>
+                        <tr>
+                            <td>T/A</td>
+                            <td colspan="14"><input type="text" name="ta" value="120/80"></td>
+                        </tr>
+                        <tr>
+                            <td>T</td>
+                            <td colspan="14"><input type="text" name="t" value="36.6"></td>
+                        </tr>
+                        <tr>
+                            <td>FC</td>
+                            <td colspan="14"><input type="text" name="fc" value="78"></td>
+                        </tr>
+                        <tr>
+                            <td>FR</td>
+                            <td colspan="14"><input type="text" name="fr" value="19"></td>
+                        </tr>
+                        <tr>
+                            <td>Spo2</td>
+                            <td colspan="14"><input type="text" name="spo2" value="95"></td>
+                        </tr>
+                        <tr>
+                            <td>Glucosa</td>
+                            <td colspan="14"><input type="text" name="glucosa"></td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+                <p>Favor de suspender lo que no está indicado, vigilar conducta y reportar eventualidades</p>
+        
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Medicamentos</th>
+                            <th>Vía</th>
+                            <th>Horario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Paroxetina 20 mg</td>
+                            <td>VO</td>
+                            <td>1 - 0 - 0</td>
+                        </tr>
+                        <tr>
+                            <td>Haloperidol 5 mg</td>
+                            <td>VO</td>
+                            <td>1 - 0 - 0</td>
+                        </tr>
+                        <tr>
+                            <td>Losartan 50 mg</td>
+                            <td>VO</td>
+                            <td>1 - 0 - 0</td>
+                        </tr>
+                        <tr>
+                            <td>Hidroxizina 10 mg</td>
+                            <td>VO</td>
+                            <td>1 - 0 - 0</td>
+                        </tr>
+                        <tr>
+                            <td>Hidroclorotiazida 25 mg</td>
+                            <td>VO</td>
+                            <td>1 - 0 - 0</td>
+                        </tr>
+                        <tr>
+                            <td>Trihexifenidilo 5 mg</td>
+                            <td>1 - 0 - 0</td>
+                        </tr>
+                        <tr>
+                            <td>Memantina 10 mg</td>
+                            <td>VO</td>
+                            <td>0 - 0 - 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+                <table>
+                    <tr>
+                        <td class="indications">Indicaciones:<textarea name="indicaciones" rows="4" cols="50"></textarea></td>
+                        <td class="shift">Turno Matutino</td>
+                        <td class="shift">Turno Vespertino</td>
+                    </tr>
+                </table>
+        
+                <table>
+                    <tr>
+                        <td>Baño</td>
+                        <td>T. física</td>
+                        <td>T. ocupacional</td>
+                        <td>T. cognitiva</td>
+                    </tr>
+                    <tr>
+                        <td><textarea name="bano" rows="4" cols="20"></textarea></td>
+                        <td><textarea name="t_fisica" rows="4" cols="20"></textarea></td>
+                        <td><textarea name="t_ocupacional" rows="4" cols="20"></textarea></td>
+                        <td><textarea name="t_cognitiva" rows="4" cols="20"></textarea></td>
+                    </tr>
+                </table>
+            </form>
+        </body>
+        </html>
+        
+
+
+
+    </div>
+
+
+    
+
+
+        
+    
+      <script src="{{ url_for('static', filename='scripts/scripts2.js') }}"></script>
+
+</body>
+
+</html>

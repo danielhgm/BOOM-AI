@@ -1,65 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOM AI</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos/index.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
 </head>
+
 <body>
 
     <!-- Menú de navegación -->
     <nav>
-        <span class="openbtn" onclick="openNav()">☰ Menu</span>
+        <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>
         <div class="menu">
-        </div>
-        <div class="login">
-            <a href="#about">Acerca de</a>
-            <a href="#services">Servicios</a>
-            <a href="#contact">Contacto</a>
-            <a href="#login"><i class="fas fa-user"></i></i>
-            </a>
+            <a href="#quehacemos">¿Qué hacemos?</a>
+            <a href="{{ url_for('servicios') }}">Servicios</a>
+            <a href="#portafolio">Portafolio</a>
+            <a href="#dudas">Dudas</a>
+            <a href="{{ url_for('tuempresa') }}">Tu empresa</a>
+            <a href="#login"><i class="fas fa-user"></i></a>
         </div>
     </nav>
 
     <!-- Menú lateral -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="/prediccion_ventas">Predicción de Ventas</a>
+        <a href="/Gestion_de_productos">Predicción de Ventas</a>
         <a href="/proveedores">Proveedores</a>
         <a href="/clientes">Clientes</a>
         <a href="/reportes">Reportes</a>
         <a href="/ajustes">Ajustes</a>
     </div>
-<div id="main">
-    <!-- Contenido principal -->
-    <div class="container">
-        <div class="logo">
-            <h1>Bienvenido a</h1>
-            <h1>BOOM AI</h1>
-        </div>
-    </div>
 
-    <div class="content">
-        <h1>La mejora de tu negocio</h1>
-        <h1>a la palma de la mano!</h1>
-        <div class="social-media">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-        </div>
-    </div>
-
-    <div class="center-side" id="center-side">
-        <p>Sean bienvenidos a BOOM AI, llegamos a donde vives,
-        hacemos preguntas y mejoramos tu empresa con software.
-        </p>
-
-    </div>
-
-    <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
 </div>
+
+
+    <div id="main">
+
+        <!-- Contenido principal -->
+       
+            <div class="quehacemos">
+                <div class="section">Logo de la empresa
+                    
+                </div>
+                <div class="section" >
+                    <h1 class="logo">Llegamos a donde vives,
+                    hacemos preguntas y mejoramos tu empresa con software.</h1>
+                    
+                
+                </div>
+                <div class="section">Imagenes de ags con estilos css</div>
+                
+                    
+            </div>
+            
+            <div class="highlight">
+                <h2>¿Que hacemos?</h2>
+                <p>En BOOM AI nos dedicamos a mejorar los negocios a través del uso de tecnología moderna;
+                    actualmente manejamos Computer Vision y Algoritmos de Inteligencia Artificial. Ofrecemos
+                    soluciones personalizadas para cada cliente, asegurando un crecimiento constante y sostenible.</p>
+            </div>
+
+            <h1></h1>
+
+            <div class="highlight">
+                <h2>Servicios</h2>
+            </div>
+
+
+
+            <h1>s</h1>
+            <h1>s</h1>
+            <h1>s</h1>
+            <div id="quehacemos">
+                <h1 class="main h1">llegamos a donde vives,
+                    hacemos preguntas y mejoramos tu empresa con software.</h1>
+                    <h2>Sobre Nosotros</h2>
+                    <p>BOOM AI es una empresa dedicada a mejorar los negocios a través de la inteligencia artificial. Ofrecemos
+                        soluciones personalizadas para cada cliente, asegurando un crecimiento constante y sostenible.</p>
+            </div>
+            <h1>s</h1>
+            <h1>s</h1>
+            <h1>s</h1>
+    </div>
+
+
+            
+
+        
+    
+      <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
+
 </body>
+
 </html>

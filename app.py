@@ -40,11 +40,19 @@ def generate_frames(camera_index=0):
 
 @app.route('/')
 def index():
-    return render_template('index2.html')
+    return render_template('index.html')
 
 @app.route('/servicios')
 def servicios():
     return render_template('servicios.html')
+
+@app.route('/tuempresa')
+def tuempresa():
+    return render_template('tuempresa.html')
+
+@app.route('/estancia')
+def estancia():
+    return render_template('estancia.html')
 
 @app.route('/video_feed')
 def video_feed():

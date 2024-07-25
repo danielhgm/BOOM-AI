@@ -1,5 +1,12 @@
 import yaml
 
+
+# Para pasar las librerias de conda actualizadas a .yml
+# conda env export --name conda1 > environment.yml
+
+
+#Pasar librerias de .yml a .txt para pip
+
 # Leer el archivo environment.yml
 with open('environment.yml', 'r') as file:
     env = yaml.safe_load(file)
