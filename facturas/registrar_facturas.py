@@ -1,39 +1,34 @@
-from flask import Flask, jsonify, request
-import pymysql.cursors
-
-
-###
-# Parece que intentaste acceder a la ruta /rf
-# con una solicitud GET, pero esa ruta está configurada
-# para aceptar solo solicitudes POST.
-
-
+from flask import Flask, request, jsonify, render_template
+import mysql.connector
+from mysql.connector import Error
 
 app = Flask(__name__)
 
 def db_connect():
-    return pymysql.connect(
-        host='localhost',        # Dirección del servidor de la base de datos (local)
-        port=3306,               # Puerto en el que está escuchando MySQL (3306 por defecto)
-        user='root',             # Nombre de usuario de la base de datos
-        password='1234',         # Contraseña del usuario de la base de datos
-        db='boomai',             # Nombre de la base de datos a la que te estás conectando
-        charset='utf8mb4',       # Conjunto de caracteres a utilizar
-        cursorclass=pymysql.cursors.DictCursor  # Tipo de cursor para retornar resultados como diccionarios
-    )
+    try:
+        connection = mysql.connector.connect(
+            user='root',
+            password='1234',
+            host='127.0.0.1',
+            database='boomai',
+            port='3307'
+        )
+        if connection.is_connected():
+            print("Conexión exitosa a la base de datos")
+            return connection
+    except Error as e:
+        print(f"Error al conectar a la base de datos: {e}")
+        return None
 
-##@app.route('/')
-# def index():
-# return render_template('index.html')
-
-@app.route('/', methods=['GET'])
-def index():
-    return "Servidor Flask en funcionamiento"
+@app.route('/registrar_facturas', methods=['GET'])
+def mostrar_formulario():
+    return render_template('registrar_facturas.html')
 
 @app.route('/registrar_facturas', methods=['POST'])
 def registrar_facturas():
     if not request.is_json:
         return jsonify({"error": "Content-Type debe ser 'application/json'"}), 400
+    
     data = request.get_json()
     
     producto_id = data.get('producto_id')
@@ -42,16 +37,21 @@ def registrar_facturas():
     fecha = data.get('fecha')
 
     connection = db_connect()
+    if connection is None:
+        return jsonify({"error": "No se pudo conectar a la base de datos"}), 500
+
     try:
-        with connection.cursor() as cursor:
-            sql = "INSERT INTO facturas (producto_id, proveedor_id, cantidad, fecha) VALUES (%s, %s, %s, %s)"
-            cursor.execute(sql, (producto_id, proveedor_id, cantidad, fecha))
-            connection.commit()
+        cursor = connection.cursor()
+        sql = "INSERT INTO facturas (producto_id, proveedor_id, cantidad, fecha) VALUES (%s, %s, %s, %s)"
+        cursor.execute(sql, (producto_id, proveedor_id, cantidad, fecha))
+        connection.commit()
         return jsonify({"message": "Registro de factura exitoso"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
-        connection.close()
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     app.run(debug=True)

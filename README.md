@@ -1,6 +1,26 @@
-# Link para drive
+# Hola! Bienvenido al README de BOOM AI, aqui iremos documentando lo necesario!
 
-Este link es una carpeta en drive con el nombre "ANOTACIONES BOOM AI"
+Wow es increible que hace nose cuanto no habiamos actualizado este .md
 
-## [Aquí esta el enlace al drive]
-(https://drive.google.com/drive/folders/1ZYnZtyMyyMLiOCvpi0egWqKqA2mS-MxU?usp=drive_link)X
+Bueno empezemos:
+
+# Diariamente se actualizan las librerias instalandas tanto en conda como en pip
+
+1. Primero eliminar environment.yml y requirements.txt
+2. Despues aplicar el siguiente comando a bash que es para pasar las librerias de conda actualizadas a .yml
+
+conda env export --name conda1 > environment.yml
+
+3. Ahora en el bash usamos:
+
+python requirementymltotxt.py
+
+Esto nos deja actualizadas las librerias para conda y pip dejando reproducibilidad, una buena practica!
+
+# Para el uso de MYSQL
+
+La documentacion extendida esta en trello pero allá vamos!
+
+[Link para trello:](https://trello.com/c/2tCY6VfI/12-mysql-en-wsl-comandos)
+
+Mañana continuo actualizando la documentación!
