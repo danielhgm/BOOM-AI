@@ -8,11 +8,11 @@ facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
 
 def db_connect():
     try:
-        connection = mysql.connector.connect(
+        connection =mysql.connector.connect(
             user='root',
-            password='1234',
+            password='',
             host='localhost',
-            database='boomai',
+            database='univai',
             port='3306'
         )
         if connection.is_connected():
