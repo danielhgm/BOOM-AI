@@ -13,7 +13,7 @@ def db_connect():
             password='1234',
             host='localhost',
             database='boomai',
-            port='3307'
+            port='3306'
         )
         if connection.is_connected():
             print("Conexión exitosa a la base de datos")
