@@ -5,9 +5,11 @@ import cv2
 from pyzbar.pyzbar import decode
 from datetime import datetime
 import numpy as np
-
+from facturas.registrar_facturas import facturas_bp
 
 app = Flask(__name__, template_folder="templates")
+
+app.register_blueprint(facturas_bp, url_prefix='/facturas')
 
 ### Codigo para escaneo de la camara
 
@@ -41,6 +43,10 @@ def generate_frames(camera_index=0):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/facturas')
+def facturas():
+    return render_template('registrar_facturas.html')
 
 @app.route('/servicios')
 def servicios():

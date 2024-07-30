@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, Blueprint
 import mysql.connector
 from mysql.connector import Error
 
@@ -9,7 +9,7 @@ def db_connect():
         connection = mysql.connector.connect(
             user='root',
             password='1234',
-            host='127.0.0.1',
+            host='localhost',
             database='boomai',
             port='3307'
         )
@@ -19,6 +19,12 @@ def db_connect():
     except Error as e:
         print(f"Error al conectar a la base de datos: {e}")
         return None
+
+facturas_bp = Blueprint('registrar_facturas', __name__, template_folder='templates')
+
+@facturas_bp.route('/factura')
+def factura():
+    return render_template('registrar_facturas.html')
 
 @app.route('/registrar_facturas', methods=['GET'])
 def mostrar_formulario():
