@@ -4,6 +4,8 @@ from mysql.connector import Error
 
 app = Flask(__name__)
 
+facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
+
 def db_connect():
     try:
         connection = mysql.connector.connect(
@@ -20,17 +22,11 @@ def db_connect():
         print(f"Error al conectar a la base de datos: {e}")
         return None
 
-facturas_bp = Blueprint('registrar_facturas', __name__, template_folder='templates')
-
-@facturas_bp.route('/factura')
-def factura():
-    return render_template('registrar_facturas.html')
-
-@app.route('/registrar_facturas', methods=['GET'])
+@facturas_bp.route('/registrar_facturas', methods=['GET'])
 def mostrar_formulario():
     return render_template('registrar_facturas.html')
 
-@app.route('/registrar_facturas', methods=['POST'])
+@facturas_bp.route('/registrar_facturas', methods=['POST'])
 def registrar_facturas():
     if not request.is_json:
         return jsonify({"error": "Content-Type debe ser 'application/json'"}), 400
