@@ -10,9 +10,9 @@ def db_connect():
     try:
         connection =mysql.connector.connect(
             user='root',
-            password='',
+            password='1234',
             host='localhost',
-            database='univai',
+            database='boomai',
             port='3306'
         )
         if connection.is_connected():

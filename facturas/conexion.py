@@ -1,8 +1,8 @@
 import mysql.connector
 
 import mysql.connector
-conexion = mysql.connector.connect(user= 'root', password= '',
+conexion = mysql.connector.connect(user= 'root', password= '1234',
                                     host= 'localhost',
-                                    database= 'univai',
+                                    database= 'boomai',
                                     port='3306')
 print(conexion)
