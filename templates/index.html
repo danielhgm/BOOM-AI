@@ -5,9 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOOM AI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var socket = io();
+            socket.on('connect', function() {
+                socket.send('User has connected!');
+            });
+
+            socket.on('message', function(data) {
+                console.log(data);
+                // Actualiza la página sin recargarla
+            });
+        });
+    </script>
     <link rel="stylesheet" href="{{ url_for('static', filename='estilos/index.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
+        
 </head>
 
 <body>
@@ -94,6 +109,7 @@
         
     
       <script src="{{ url_for('static', filename='scripts/scripts.js') }}"></script>
+
 
 </body>
 

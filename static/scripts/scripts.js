@@ -33,6 +33,5 @@ window.addEventListener('scroll', function() {
     }
   });
 
-  //Añadir nueva funcion
 
   

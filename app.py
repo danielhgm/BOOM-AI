@@ -7,11 +7,12 @@ import cv2
 from pyzbar.pyzbar import decode
 from datetime import datetime
 import numpy as np
-
+from flask_socketio import SocketIO
 from facturas.registrar_facturas import facturas_bp
 
 
 app = Flask(__name__, template_folder="templates")
+socketio = SocketIO(app)
 
 app.register_blueprint(facturas_bp, url_prefix='/facturas')
 

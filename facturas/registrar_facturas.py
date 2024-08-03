@@ -1,19 +1,20 @@
 from flask import Flask, request, jsonify, render_template, Blueprint
 import mysql.connector
 from mysql.connector import Error
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
-
+socketio = SocketIO(app)
 facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
 
 def db_connect():
     try:
         connection = mysql.connector.connect(
             user='root',
-            password='1234',
+            password='Altima_2800',
             host='localhost',
             database='boomai',
-            port='3306'
+            port='3307'
         )
         if connection.is_connected():
             print("Conexión exitosa a la base de datos")
