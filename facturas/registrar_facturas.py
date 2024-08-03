@@ -9,7 +9,7 @@ facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
 
 def db_connect():
     try:
-        connection = mysql.connector.connect(
+        connection =mysql.connector.connect(
             user='root',
             password='Altima_2800',
             host='localhost',
