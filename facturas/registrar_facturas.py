@@ -1,10 +1,8 @@
 from flask import Flask, request, jsonify, render_template, Blueprint
 import mysql.connector
 from mysql.connector import Error
-from flask_socketio import SocketIO
 
 app = Flask(__name__)
-socketio = SocketIO(app)
 facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
 
 def db_connect():
