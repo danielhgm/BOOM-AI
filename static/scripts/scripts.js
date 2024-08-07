@@ -33,5 +33,26 @@ window.addEventListener('scroll', function() {
     }
   });
 
+// Esto es para menu login sacado de uiverse.io , autor --> Praashoo7
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loginLink = document.getElementById('loginLink');
+    const loginFrame = document.getElementById('loginFrame');
+    const overlay = document.getElementById('overlay');
+
+    loginLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        loginFrame.style.display = 'block';
+        overlay.style.display = 'block';
+    });
+
+    overlay.addEventListener('click', function() {
+        loginFrame.style.display = 'none';
+        overlay.style.display = 'none';
+    });
+});
+
+
+
 
   
