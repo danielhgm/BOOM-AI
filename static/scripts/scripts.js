@@ -33,24 +33,70 @@ window.addEventListener('scroll', function() {
     }
   });
 
-// Esto es para menu login sacado de uiverse.io , autor --> Praashoo7
+// Esto es para registrarse|crear cuenta
 
-document.addEventListener('DOMContentLoaded', function() {
-    const loginLink = document.getElementById('loginLink');
-    const loginFrame = document.getElementById('loginFrame');
-    const overlay = document.getElementById('overlay');
+function showNotification(message, success) {
+    const notification = document.getElementById('notification');
+    notification.style.display = 'block';
+    notification.style.backgroundColor = success ? 'lightgreen' : 'lightcoral';
+    notification.innerText = message;
+  }
 
-    loginLink.addEventListener('click', function(event) {
-        event.preventDefault();
-        loginFrame.style.display = 'block';
-        overlay.style.display = 'block';
-    });
+  document.getElementById('registerForm').addEventListener('submit', function (event) {
+    event.preventDefault();
 
-    overlay.addEventListener('click', function() {
-        loginFrame.style.display = 'none';
-        overlay.style.display = 'none';
-    });
-});
+    const username = document.getElementById('registerUsario').value;
+    const email = document.getElementById('registerEmail').value;
+    const password = document.getElementById('registerPassword').value;
+
+    fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        showNotification(data.message, data.success);
+      })
+      .catch(error => {
+        showNotification('Error: ' + error, false);
+      });
+  });
+
+// Esto es para iniciar sesion|ingresar
+
+
+  document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const username = document.getElementById('loginUsuario').value;
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        showNotification(data.message, data.success);
+      })
+      .catch(error => {
+        showNotification('Error: ' + error, false);
+      });
+  });
 
 
 

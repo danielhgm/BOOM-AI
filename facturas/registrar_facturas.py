@@ -43,7 +43,7 @@ def registrar_facturas():
 
     try:
         cursor = connection.cursor()
-        sql = "INSERT INTO facturas (producto_id, proveedor_id, cantidad, fecha) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO productos (producto_id, proveedor_id, cantidad, fecha) VALUES (%s, %s, %s, %s)"
         cursor.execute(sql, (producto_id, proveedor_id, cantidad, fecha))
         connection.commit()
         return jsonify({"message": "Registro de factura exitoso"}), 201
