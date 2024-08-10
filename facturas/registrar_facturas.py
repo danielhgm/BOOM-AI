@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 app = Flask(__name__)
 
->>>>>>> ecede1e (mi_ip)
+
 facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
 
 def db_connect():
