@@ -1,17 +1,12 @@
-from flask import Flask, request, jsonify, render_template, Blueprint
+from flask import Blueprint, render_template, request, jsonify
 import mysql.connector
 from mysql.connector import Error
 
-
-
-app = Flask(__name__)
-
-
-facturas_bp = Blueprint('facturas', __name__, template_folder='templates')
+proveedores_bp = Blueprint('proveedores', __name__, template_folder='templates')
 
 def db_connect():
     try:
-        connection =mysql.connector.connect(
+        connection = mysql.connector.connect(
             user='virtualbox1',
             password='Altima_2800',
             host='172.29.193.211',
@@ -25,21 +20,21 @@ def db_connect():
         print(f"Error al conectar a la base de datos: {e}")
         return None
 
-@facturas_bp.route('/registrar_facturas', methods=['GET'])
+@proveedores_bp.route('/registrar_proveedores', methods=['GET'])
 def mostrar_formulario():
-    return render_template('registrar_facturas.html')
+    return render_template('registrar_proveedores.html')
 
-@facturas_bp.route('/registrar_facturas', methods=['POST'])
-def registrar_facturas():
+@proveedores_bp.route('/registrar_proveedores', methods=['POST'])
+def registrar_proveedor():
     if not request.is_json:
         return jsonify({"error": "Content-Type debe ser 'application/json'"}), 400
     
     data = request.get_json()
     
-    producto_id = data.get('producto_id')
     proveedor_id = data.get('proveedor_id')
-    cantidad = data.get('cantidad')
-    fecha = data.get('fecha')
+    nombre = data.get('nombre')
+    direccion = data.get('direccion')
+    telefono = data.get('telefono')
 
     connection = db_connect()
     if connection is None:
@@ -47,16 +42,13 @@ def registrar_facturas():
 
     try:
         cursor = connection.cursor()
-        sql = "INSERT INTO productos (producto_id, proveedor_id, cantidad, fecha) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, (producto_id, proveedor_id, cantidad, fecha))
+        sql = "INSERT INTO proveedores (proveedor_id, nombre, direccion, telefono) VALUES (%s, %s, %s, %s)"
+        cursor.execute(sql, (proveedor_id, nombre, direccion, telefono))
         connection.commit()
-        return jsonify({"message": "Registro de factura exitoso"}), 201
+        return jsonify({"message": "Proveedor registrado exitosamente"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
-
-if __name__ == '__main__':
-    app.run(debug=True)

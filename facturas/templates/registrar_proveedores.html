@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Factura</title>
+    <title>Registrar Proveedor</title>
     <style>
         form {
             width: 300px;
@@ -19,19 +19,19 @@
     </style>
 </head>
 <body>
-    <h1>Registrar Producto</h1>
-    <form id="facturaForm">
-        <label for="producto_id">ID del Producto:</label>
-        <input type="text" id="producto_id" name="producto_id" required>
-
+    <h1>Registrar Proveedor</h1>
+    <form id="proveedorForm">
         <label for="proveedor_id">ID del Proveedor:</label>
         <input type="text" id="proveedor_id" name="proveedor_id" required>
 
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" required>
+        <label for="nombre">Nombre del Proveedor:</label>
+        <input type="text" id="nombre" name="nombre" required>
 
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha" required>
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" required>
 
         <input type="submit" value="Registrar">
     </form>
@@ -39,26 +39,26 @@
     <p id="responseMessage"></p>
 
     <script>
-        document.getElementById('facturaForm').addEventListener('submit', function(event) {
+        document.getElementById('proveedorForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const producto_id = document.getElementById('producto_id').value;
             const proveedor_id = document.getElementById('proveedor_id').value;
-            const cantidad = document.getElementById('cantidad').value;
-            const fecha = document.getElementById('fecha').value;
+            const nombre = document.getElementById('nombre').value;
+            const direccion = document.getElementById('direccion').value;
+            const telefono = document.getElementById('telefono').value;
 
-            //Cambiar este ip por el verdadero
+            // Cambiar este ip por el verdadero
 
-            fetch('http://127.0.0.1:5000/facturas/registrar_facturas', {
+            fetch('http://127.0.0.1:5000/proveedores/registrar_proveedores', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    producto_id: producto_id,
                     proveedor_id: proveedor_id,
-                    cantidad: cantidad,
-                    fecha: fecha
+                    nombre: nombre,
+                    direccion: direccion,
+                    telefono: telefono
                 })
             })
             .then(response => response.json())
