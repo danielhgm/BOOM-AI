@@ -32,7 +32,8 @@
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="/Gestion_de_productos">Predicción de Ventas</a>
-    <a href="/proveedores">Proveedores</a>
+    <a href="{{ url_for('proveedores.mostrar_formulario') }}">Proveedores</a>
+    <a href="{{ url_for('proveedores.mostrar_formulario') }}">Consultar mis Proveedores</a>
     <a href="/clientes">Clientes</a>
     <a href="/reportes">Reportes</a>
     <a href="/registrar_facturas.html">Consultar Facturas</a>

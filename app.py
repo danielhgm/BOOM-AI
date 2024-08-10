@@ -1,35 +1,28 @@
-# app.py
-from flask import Flask, render_template, request, jsonify, url_for, Response, Blueprint
+from flask import Flask, render_template, request, jsonify, Blueprint
 import mysql.connector
 from mysql.connector import Error
-import joblib
-import cv2
-from pyzbar.pyzbar import decode
-from datetime import datetime
-import numpy as np
 from facturas.registrar_facturas import facturas_bp
-#importar librerias para el login y signup
-
+from facturas.registrar_proveedores import proveedores_bp
 from flask_bcrypt import Bcrypt
 
 
+
 app = Flask(__name__, template_folder="templates")
-#codigo para contraseña
 app.config['SECRET_KEY'] = '1234'
 bcrypt = Bcrypt(app)
 
 app.register_blueprint(facturas_bp, url_prefix='/facturas')
+app.register_blueprint(proveedores_bp, url_prefix='/proveedores')
 
-
-#conexion a bd
+# Conexión a la base de datos
 def db_connect():
     try:
         connection = mysql.connector.connect(
-            user='root',
+            user='virtualbox1',
             password='Altima_2800',
-            host='localhost',
+            host='172.29.193.211',
             database='boomai',
-            port='3307'
+            port='3306'
         )
         if connection.is_connected():
             print("Conexión exitosa a la base de datos")
@@ -37,7 +30,6 @@ def db_connect():
     except Error as e:
         print(f"Error al conectar a la base de datos: {e}")
         return None
-
 
 @app.route('/')
 def index():
@@ -55,13 +47,9 @@ def tuempresa():
 def estancia():
     return render_template('estancia.html')
 
-#Ruta para las pruebas de login y signup
-
 @app.route('/cuenta')
 def cuenta():
     return render_template('login.html')
-
-#Ruta para crear una cuenta
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -94,9 +82,6 @@ def register():
         if connection.is_connected():
             cursor.close()
             connection.close()
-
-##Ruta para iniciar sesion
-
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -132,4 +117,4 @@ def login():
             connection.close()
 
 if __name__ == '__main__':
-   app.run(debug=True)
+    app.run(debug=True)
