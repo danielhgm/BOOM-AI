@@ -8,13 +8,8 @@ from pyzbar.pyzbar import decode
 from datetime import datetime
 import numpy as np
 from facturas.registrar_facturas import facturas_bp
-<<<<<<< HEAD
-
-#importar librerias para el login y signup
-=======
 from facturas.registrar_proveedores import proveedores_bp
 from facturas.registrar_gastos import gastos_bp
->>>>>>> fb6b215 (Anadi la seccion gastos pero aun no funciona)
 from flask_bcrypt import Bcrypt
 
 
@@ -24,11 +19,8 @@ app.config['SECRET_KEY'] = '1234'
 bcrypt = Bcrypt(app)
 
 app.register_blueprint(facturas_bp, url_prefix='/facturas')
-<<<<<<< HEAD
-=======
 app.register_blueprint(proveedores_bp, url_prefix='/proveedores')
 app.register_blueprint(gastos_bp, url_prefix='/gastos')
->>>>>>> fb6b215 (Anadi la seccion gastos pero aun no funciona)
 
 
 #conexion a bd
@@ -36,17 +28,17 @@ def db_connect():
     try:
         connection = mysql.connector.connect(
             #bd dani
-            user='root',
-            password='Altima_2800',
-            host='localhost',
-            database='boomai',
-            port='3307'
-            #bd ivan
-            #user='virtualbox1',
+            #user='root',
             #password='Altima_2800',
-            #host='172.29.193.211',
+            #host='localhost',
             #database='boomai',
-            #port='3306
+            #port='3307'
+            #bd ivan
+            user='virtualbox1',
+            password='Altima_2800',
+            host='172.29.193.211',
+            database='boomai',
+            port='3306'
         )
         if connection.is_connected():
             print("Conexión exitosa a la base de datos")

@@ -24,18 +24,18 @@ def db_connect():
 
 
 # Ruta para mostrar el formulario de registro de gastos
-@gastos_bp.route('/gastos', methods=['GET'])
+@gastos_bp.route('/registrar_gastos', methods=['GET'])
 def mostrar_formulario():
     return render_template('registrar_gastos.html')
 
 # Ruta para registrar un nuevo gasto
-@gastos_bp.route('/gastos', methods=['POST'])
+@gastos_bp.route('/registrar_gastos', methods=['POST'])
 def registrar_gasto():
     if not request.is_json:
         return jsonify({"error": "Content-Type debe ser 'application/json'"}), 400
     
     data = request.get_json()
-    id = data.get('id')
+    
     descripcion = data.get('descripcion')
     monto = data.get('monto')
     fecha = data.get('fecha')
@@ -46,8 +46,8 @@ def registrar_gasto():
 
     try:
         cursor = connection.cursor()
-        sql = "INSERT INTO gastos (descripcion, monto, fecha) VALUES (%s, %s, %s,%s)"
-        cursor.execute(sql, (id,descripcion, monto, fecha))
+        sql = "INSERT INTO gastos (descripcion, monto, fecha) VALUES ( %s, %s,%s)"
+        cursor.execute(sql, (descripcion, monto, fecha))
         connection.commit()
         return jsonify({"message": "Gasto registrado exitosamente"}), 201
     except Exception as e:

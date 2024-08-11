@@ -57,7 +57,6 @@
             event.preventDefault();
 
         
-            const descripcion = document.getElementById('id').value;
             const descripcion = document.getElementById('descripcion').value;
             const monto = document.getElementById('monto').value;
             const fecha = document.getElementById('fecha').value;
@@ -68,7 +67,6 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    id: id,
                     descripcion: descripcion,
                     monto: monto,
                     fecha: fecha
