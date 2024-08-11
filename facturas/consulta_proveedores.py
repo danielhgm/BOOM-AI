@@ -22,40 +22,8 @@ def db_connect():
         print(f"Error al conectar a la base de datos: {e}")
         return None
 
-# Ruta para mostrar el formulario de registro de proveedores
-@proveedores_bp.route('/registrar_proveedores', methods=['GET'])
-def mostrar_formulario():
-    return render_template('registrar_proveedores.html')
 
-# Ruta para registrar un proveedor en la base de datos
-@proveedores_bp.route('/registrar_proveedores', methods=['POST'])
-def registrar_proveedor():
-    if not request.is_json:
-        return jsonify({"error": "Content-Type debe ser 'application/json'"}), 400
-    
-    data = request.get_json()
-    
-    proveedor_id = data.get('proveedor_id')
-    nombre = data.get('nombre')
-    direccion = data.get('direccion')
-    telefono = data.get('telefono')
 
-    connection = db_connect()
-    if connection is None:
-        return jsonify({"error": "No se pudo conectar a la base de datos"}), 500
-
-    try:
-        cursor = connection.cursor()
-        sql = "INSERT INTO proveedores (proveedor_id, nombre, direccion, telefono) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, (proveedor_id, nombre, direccion, telefono))
-        connection.commit()
-        return jsonify({"message": "Proveedor registrado exitosamente"}), 201
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
 
 # Nueva ruta para consultar todos los proveedores
 @proveedores_bp.route('/consultar_proveedores', methods=['GET'])
@@ -65,11 +33,10 @@ def consultar_proveedores():
         return jsonify({"error": "No se pudo conectar a la base de datos"}), 500
 
     try:
-        cursor = connection.cursor(dictionary=True)  # dictionary=True devuelve los resultados como diccionarios
-        sql = "SELECT * FROM proveedores"
-        cursor.execute(sql)
-        resultados = cursor.fetchall()
-        return jsonify(resultados), 200
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM proveedores")
+        proveedores = cursor.fetchall()
+        return render_template('consulta_proveedores.html', proveedores=proveedores)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     finally:
