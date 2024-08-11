@@ -151,7 +151,7 @@ python_abi=3.12=4_cp312
 pytz=2024.1=pyhd8ed1ab_0
 qt6-main=6.7.2=h0f8cd61_1
 readline=8.2=h8228510_1
-scikit-learn=1.5.0=py312h1fcc3ea_1
+scikit-learn=1.5.1=py312h775a589_0
 scipy=1.13.1=py312hc2bc53b_0
 setuptools=70.1.0=pyhd8ed1ab_0
 six=1.16.0=pyh6c4a22f_0
