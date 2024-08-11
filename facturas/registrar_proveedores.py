@@ -52,3 +52,22 @@ def registrar_proveedor():
         if connection.is_connected():
             cursor.close()
             connection.close()
+# Nueva ruta para consultar todos los proveedores
+@proveedores_bp.route('/consultar_proveedores', methods=['GET'])
+def consultar_proveedores():
+    connection = db_connect()
+    if connection is None:
+        return jsonify({"error": "No se pudo conectar a la base de datos"}), 500
+
+    try:
+        cursor = connection.cursor(dictionary=True)  # dictionary=True devuelve los resultados como diccionarios
+        sql = "SELECT * FROM proveedores"
+        cursor.execute(sql)
+        resultados = cursor.fetchall()
+        return jsonify(resultados), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()

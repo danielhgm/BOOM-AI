@@ -13,8 +13,12 @@
             display: block;
             margin-bottom: 10px;
         }
-        input[type="submit"] {
+        input[type="submit"], button {
             width: 100%;
+            margin-top: 10px;
+        }
+        #responseMessage {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -36,6 +40,8 @@
         <input type="submit" value="Registrar">
     </form>
 
+    <button id="consultarProveedores">Consultar Proveedores</button>
+
     <p id="responseMessage"></p>
 
     <script>
@@ -46,8 +52,6 @@
             const nombre = document.getElementById('nombre').value;
             const direccion = document.getElementById('direccion').value;
             const telefono = document.getElementById('telefono').value;
-
-            // Cambiar este ip por el verdadero
 
             fetch('http://127.0.0.1:5000/proveedores/registrar_proveedores', {
                 method: 'POST',
@@ -67,6 +71,29 @@
                 if (data.message) {
                     responseMessage.textContent = data.message;
                     responseMessage.style.color = 'green';
+                } else {
+                    responseMessage.textContent = data.error;
+                    responseMessage.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                const responseMessage = document.getElementById('responseMessage');
+                responseMessage.textContent = 'Error: ' + error;
+                responseMessage.style.color = 'red';
+            });
+        });
+
+        document.getElementById('consultarProveedores').addEventListener('click', function() {
+            fetch('http://127.0.0.1:5000/proveedores/consultar_proveedores')
+            .then(response => response.json())
+            .then(data => {
+                const responseMessage = document.getElementById('responseMessage');
+                if (Array.isArray(data)) {
+                    responseMessage.innerHTML = "<strong>Proveedores Registrados:</strong><br>";
+                    data.forEach(proveedor => {
+                        responseMessage.innerHTML += `ID: ${proveedor.proveedor_id}, Nombre: ${proveedor.nombre}, Dirección: ${proveedor.direccion}, Teléfono: ${proveedor.telefono}<br>`;
+                    });
+                    responseMessage.style.color = 'black';
                 } else {
                     responseMessage.textContent = data.error;
                     responseMessage.style.color = 'red';
