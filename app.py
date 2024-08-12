@@ -64,6 +64,12 @@ def tuempresa():
 def estancia():
     return render_template('estancia.html')
 
+#Ruta para ISR
+
+@app.route('/ISR')
+def ISR():
+    return render_template('ISR.html')
+
 #Ruta para crear una cuenta
 
 @app.route('/register', methods=['POST'])
