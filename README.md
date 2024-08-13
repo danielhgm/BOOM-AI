@@ -24,3 +24,7 @@ La documentacion extendida esta en trello pero allá vamos!
 [Link para trello:](https://trello.com/c/2tCY6VfI/12-mysql-en-wsl-comandos)
 
 Mañana continuo actualizando la documentación!
+
+## Dia 12 de agosto del 2024
+
+Actualizo este readme para mencionar que con este commit tambien añadire los cambios relacionados con el ISR, ayer habia hecho push pero hoy no aparece hecho este push, esta adicion de texto es simplemente para mencionar que ya hice push.
