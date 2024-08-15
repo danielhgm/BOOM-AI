@@ -25,6 +25,11 @@ def db_connect():
         print(f"Error al conectar a la base de datos: {e}")
         return None
 
+@facturas_bp.route('/menu_facturas', methods=['GET'])
+def menu_facturas():
+    return render_template('menu_facturas.html')
+
+
 @facturas_bp.route('/registrar_facturas', methods=['GET'])
 def mostrar_formulario():
     return render_template('registrar_facturas.html')

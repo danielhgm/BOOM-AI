@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOOM AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/index.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/login/crear_cuenta.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/login/iniciar_sesion.css') }}">
+</head>
+<body>
+  <!-- Menú de navegación -->
+  <nav>
+    <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>
+    <div class="menu">
+      <a href="#quehacemos">Qué hacemos</a>
+      <a href="{{ url_for('servicios') }}">Servicios</a>
+      <a href="{{ url_for('facturas.mostrar_formulario') }}">Facturas</a>
+      <a href="#dudas">Dudas</a>
+      <a href="{{ url_for('tuempresa') }}">Tu empresa</a>
+      <a href="{{ url_for('ISR') }}">ISR</a>
+      <a href="{{ url_for('index') }}"><i class="fas fa-arrow-left"></i></a>
+
+    </div>
+  </nav>
+  
+  <!-- Menú lateral -->
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/Gestion_de_productos">Predicción de Ventas</a>
+    <a href="{{ url_for('proveedores.mostrar_formulario') }}">Proveedores</a>
+    <a href="{{ url_for('proveedores.consultar_proveedores') }}">Consultar mis Proveedores</a>
+    <a href="{{ url_for('gastos.mostrar_formulario') }}">Registro Gastos</a>
+    <a href="/clientes">Clientes</a>
+    <a href="/reportes">Reportes</a>
+    <a href="/registrar_facturas.html">Consultar Facturas</a>
+    <a href="/ajustes">Ajustes</a>
+  </div>
+
+
+  <div id="main">
+
+    <!-- Contenido principal -->
+
+    <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FvWdC6t5ROa6rXrc1UwQqrl%2FUntitled%3Fnode-id%3D0-1%26t%3D6y2UilMuhhRFsFew-1" allowfullscreen></iframe>
+  </div>
+
+
+
+
+
+
+  <script src="{{ url_for('static', filename='scripts/general.js') }}"></script>
+</body>
+
+</html>
