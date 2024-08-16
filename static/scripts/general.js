@@ -19,16 +19,17 @@ function closeNav() {
 }
 
 //Nav var al deslizar hacia abajo
-
 window.addEventListener('scroll', function() {
+    // Alternar la clase 'scrolled' en el body si se ha desplazado más de 50px
     document.body.classList.toggle('scrolled', window.scrollY > 50);
-    });
+});
 
 window.addEventListener('scroll', function() {
-    var nav = document.querySelector('nav');
+    // Obtener el elemento 'nav' por su ID
+    var nav = document.getElementById('nav');
     if (window.scrollY > 0) {
-      nav.classList.add('scrolled');
+        nav.classList.add('scrolled');
     } else {
-      nav.classList.remove('scrolled');
+        nav.classList.remove('scrolled');
     }
-  });
+});

@@ -1,3 +1,8 @@
+function cerrarCrearCuenta() {
+  document.getElementById('overlay_crear_cuenta').style.display = 'none';
+  document.getElementById('crear_cuenta-frame').style.display = 'none';
+}
+
 // Asocia la función al evento de clic en el enlace "Crear cuenta"
 document.getElementById('showRegisterForm').addEventListener('click', function(event) {
   event.preventDefault(); // Evitar que el enlace navegue

@@ -1,5 +1,6 @@
-/* Estilos para el frame de crear cuenta */
-.crear_cuenta-frame {
+
+/* Estilos para el frame de iniciar sesion y crear cuenta*/
+.iniciar_sesion-frame , .crear_cuenta-frame {
     display: none;
     position: fixed;
     top: 50%;
@@ -7,7 +8,7 @@
     transform: translate(-50%, -50%);
     z-index: 1000;
   }
-  .overlay_crear_cuenta {
+  .overlay_iniciar_sesion, .overlay_crear_cuenta {
     display: none;
     position: fixed;
     top: 0;
@@ -17,9 +18,10 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
   }
-
-/* Diseño para menu de crear una cuenta*/
+  
+/* Diseño para menu de iniciar sesion y crear cuenta*/
 .form {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;

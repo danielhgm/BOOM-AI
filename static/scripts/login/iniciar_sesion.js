@@ -1,3 +1,8 @@
+function cerrarIniciarSesion() {
+  document.getElementById('overlay_iniciar_sesion').style.display = 'none';
+  document.getElementById('iniciar_sesion-frame').style.display = 'none';
+}
+
 // Asocia la función al evento de clic en el enlace "Iniciar sesión"
 document.getElementById('showLoginForm').addEventListener('click', function(event) {
   event.preventDefault(); // Evitar que el enlace navegue
