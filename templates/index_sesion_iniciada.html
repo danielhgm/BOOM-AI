@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='estilos/index.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     integrity="sha512-..." crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/usuario/menu_usuario.css') }}">
 
 
 </head>
@@ -16,18 +17,21 @@
   <nav>
     <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>
     <div class="menu">
-      <a href="#quehacemos">Qué hacemos</a>
-      <a href="{{ url_for('servicios') }}">Servicios</a>
-      <a href="{{ url_for('facturas.mostrar_formulario') }}">Facturas</a>
-      <a href="#dudas">Dudas</a>
-      <a href="{{ url_for('tuempresa') }}">Tu empresa</a>
-      <a href="#registrarse" id="showRegisterForm">Registrarse</a>
-      <a href="#iniciar-sesion" id="showLoginForm">Iniciar sesion</a>
-      <a href="{{ url_for('ISR') }}">ISR</a>
-
+      <div class="menu-container">
+        <a onclick="DOMContentLoaded()" id="usuario" class="menu-button"><i class="fas fa-user"></i></a>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="/ajustes">Ajustes</a>
+            <a href="/configuracion-avanzada">Configuración avanzada</a>
+            <a href="/privacidad">Privacidad</a>
+            <a href="/cerrar-sesion">Cerrar sesión</a>
+        </div>
+    </div>
+      
     </div>
   </nav>
   
+  
+
   <!-- Menú lateral -->
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -39,6 +43,12 @@
     <a href="/reportes">Reportes</a>
     <a href="{{ url_for('facturas.menu_facturas') }}">Sistema de facturas</a>
     <a href="/ajustes">Ajustes</a>
+    <a href="{{ url_for('ISR') }}">ISR</a>
+    <a href="{{ url_for('servicios') }}">Servicios</a>
+    <a href="{{ url_for('facturas.mostrar_formulario') }}">Facturas</a>
+    <a href="#dudas">Dudas</a>
+    <a href="{{ url_for('tuempresa') }}">Tu empresa</a>
+    <a href="#quehacemos">Qué hacemos</a>
   </div>
 
   
@@ -100,6 +110,7 @@
 
 
   <script src="{{ url_for('static', filename='scripts/general.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/usuario/menu_usuario.js') }}"></script>
 
 </body>
 

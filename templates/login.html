@@ -19,7 +19,7 @@
   <!-- Contenedor para notificaciones -->
   <div id="notification" class="notification-box"></div>
 
-  <div class="overlay_crear_cuenta" id="overlay_crear_cuenta" style="display: none;">
+  <div class="overlay_crear_cuenta" id="overlay_crear_cuenta">
     <div class="crear_cuenta-frame" id="crear_cuenta-frame">
 
       <!-- Formulario para crear una cuenta -->
@@ -61,14 +61,14 @@
   </div>
   
 
-  <div class="overlay_iniciar_sesion" id="overlay_iniciar_sesion" style="display: none;">
+  <div class="overlay_iniciar_sesion" id="overlay_iniciar_sesion">
     <div class="iniciar_sesion-frame" id="iniciar_sesion-frame">
 
         <!-- Formulario para iniciar sesion -->
      
     <form id="loginForm" class="form" >
       <div class="flex-column">
-        <!-- Botón de cerrar -->
+        <!-- Botón cerrar login -->
         <button class="close-button" onclick="cerrarIniciarSesion()">×</button>
       </div>
       <div class="flex-column"><label>Email </label></div>
@@ -104,7 +104,7 @@
   <script src="{{ url_for('static', filename='scripts/login/iniciar_sesion.js') }}"></script> 
   <script src="{{ url_for('static', filename='scripts/login/notificacion.js') }}"></script>
   <script src="{{ url_for('static', filename='scripts/login/cambiar_formulario.js') }}"></script>
-  <script src="{{ url_for('static', filename='scripts/login/cerrar_formularios.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/login/cerrar_formulario.js') }}"></script>
   <!--Scripts para inicio de sesion con google-->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>

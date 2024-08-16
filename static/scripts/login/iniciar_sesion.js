@@ -15,20 +15,13 @@ function showLoginForm() {
   document.getElementById('iniciar_sesion-frame').style.display = 'block';
 }
 
-// Función para ocultar el formulario de inicio de sesión
-function hideLoginForm() {
-  document.getElementById('overlay_iniciar_sesion').style.display = 'none';
-  document.getElementById('iniciar_sesion-frame').style.display = 'none';
-}
-
 // Manejar clics en el documento para cerrar el formulario de inicio de sesión
-document.addEventListener('mousedown', function(event) {
-  const loginForm = document.getElementById('iniciar_sesion-frame');
-  const overlayLogin = document.getElementById('overlay_iniciar_sesion');
-
-  // Verifica si el clic fue fuera del formulario de inicio de sesión
-  if (overlayLogin.style.display === 'block' && !loginForm.contains(event.target) && !overlayLogin.contains(event.target)) {
-    hideLoginForm();
+document.addEventListener('click', function(event) {
+  // Verifica si el clic ocurrió fuera del formulario y del overlay
+  if (iniciar_sesion-frame && overlay_iniciar_sesion && !iniciar_sesion-frame.contains(event.target) && !overlay_iniciar_sesion.contains(event.target)) {
+    // Cierra el formulario de inicio de sesión y el overlay
+    loginForm.style.display = 'none';
+    overlayLogin.style.display = 'none';
   }
 });
 
@@ -56,11 +49,14 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
       })
   })
   .then(response => response.json())
-  .then(data => {
-      showNotification(data.message, data.success);
-  })
-  .catch(error => {
-      showNotification('Error: ' + error, false);
-  });
-});
+.then(data => {
+    //se documentaron las 2 opciones ya que es mejor para que sea instantaneo
+    //alert(data.message); // Mostrar la alerta con el mensaje recibido
+    //showNotification(data.message, data.success);  // Mostrar la notificacion con el mensaje recibido
 
+    if (data.success && data.redirect_url) {
+        // Redirigir a la URL proporcionada en el JSON
+        window.location.href = data.redirect_url;
+    }
+}).catch(error => console.error('Error:', error));
+})

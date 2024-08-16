@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOOM AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos/index.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" />
+
+
+</head>
+<body>
+  <!-- Menú de navegación -->
+  <nav>
+    <!-- <span class="openbtn" onclick="openNav()"><i class="fas fa-gem"></i> Menu</span>-->
+     <span></span>
+    <div class="menu">
+      
+      <a href="#registrarse" id="showRegisterForm">Registrarse</a>
+      <a href="#iniciar-sesion" id="showLoginForm">Iniciar sesion</a>
+      
+
+    </div>
+  </nav>
+  
+  {% include 'servicios/login.html' %}
+
+  <div id="main">
+
+    <!-- Contenido principal -->
+
+    <div class="quehacemos">
+      <div class="section">Logo de la empresa
+
+      </div>
+      <div class="section">
+        <h1 class="logo">Llegamos a donde vives,
+          hacemos preguntas y mejoramos tu empresa con software.</h1>
+
+
+      </div>
+      <div class="section">Imagenes de ags con estilos css</div>
+
+
+    </div>
+
+    <div class="highlight">
+      <h2>Que hacemos</h2>
+      <p>En BOOM AI nos dedicamos a mejorar los negocios a través del uso de tecnología moderna;
+        actualmente manejamos Computer Vision y Algoritmos de Inteligencia Artificial. Ofrecemos
+        soluciones personalizadas para cada cliente, asegurando un crecimiento constante y sostenible.</p>
+    </div>
+
+    <h1></h1>
+
+    <div class="highlight">
+      <h2>Servicios</h2>
+    </div>
+
+
+
+    <h1>s</h1>
+    <h1>s</h1>
+    <h1>s</h1>
+    <div id="quehacemos">
+      <h1 class="main h1">llegamos a donde vives,
+        hacemos preguntas y mejoramos tu empresa con software.</h1>
+      <h2>Sobre Nosotros</h2>
+      <p>BOOM AI es una empresa dedicada a mejorar los negocios a través de la inteligencia artificial. Ofrecemos
+        soluciones personalizadas para cada cliente, asegurando un crecimiento constante y sostenible.</p>
+    </div>
+    <h1>s</h1>
+    <h1>s</h1>
+    <h1>s</h1>
+  </div>
+
+
+
+
+
+
+
+  <script src="{{ url_for('static', filename='scripts/general.js') }}"></script>
+
+</body>
+
+</html>

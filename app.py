@@ -1,5 +1,6 @@
 # app.py
 from flask import Flask, render_template, request, jsonify, url_for, Response, Blueprint, session, redirect
+#from flask import redirect_request(req, fp, code, msg, hdrs, newurl)
 import mysql.connector
 from mysql.connector import Error
 import joblib
@@ -18,6 +19,7 @@ import os
 
 app = Flask(__name__, template_folder="templates")
 bcrypt = Bcrypt(app)
+app.secret_key = '1234' #No eliminar, es para que pueda funcionar el login
 
 app.register_blueprint(facturas_bp, url_prefix='/facturas')
 app.register_blueprint(proveedores_bp, url_prefix='/proveedores')
@@ -49,8 +51,12 @@ def db_connect():
 
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def index_sesion_no_iniciada():
+    return render_template('index_sesion_no_iniciada.html')
+
+@app.route('/index_sesion_iniciada')
+def index_sesion_iniciada():
+    return render_template('index_sesion_iniciada.html')
 
 @app.route('/servicios')
 def servicios():
@@ -72,7 +78,7 @@ def ISR():
 
 #Ruta para crear una cuenta
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST','GET'])
 def register():
     if not request.is_json:
         return jsonify({"message": "Content-Type debe ser 'application/json'", "success": False}), 200
@@ -106,10 +112,10 @@ def register():
 
 ##Ruta para iniciar sesion
 
-@app.route('/login', methods=['POST','GET'])
+@app.route('/login', methods=['POST'])
 def login():
     if not request.is_json:
-        return jsonify({"message": "Content-Type debe ser 'application/json'", "success": False}), 200
+        return jsonify({"message": "Content-Type debe ser 'application/json'", "success": False}), 201
 
     data = request.get_json()
     email = data.get('email')
@@ -129,15 +135,39 @@ def login():
         user = cursor.fetchone()
         
         if user and bcrypt.check_password_hash(user[3], password):  # user[3] es la columna de la contraseña
-            return jsonify({"message": "Inicio de sesión exitoso", "success": True}), 200
+            session['user_id'] = user[0]  # Almacena el ID del usuario en la sesión
+            # Imprimir en la terminal
+            print(f"Usuario inició sesión con: ID={user[0]}, Usuario={user[1]}, Correo={user[2]}")  # Ajusta los índices según tu esquema
+            return jsonify({"message": "Inicio de sesión exitoso", "success": True, "redirect_url": url_for('dashboard')})
         else:
-            return jsonify({"message": "Credenciales incorrectas", "success": False}), 200
+            return jsonify({"message": "Credenciales incorrectas", "success": False}), 210
     except Exception as e:
-        return jsonify({"message": str(e), "success": False}), 200
+        return jsonify({"message": str(e), "success": False}), 211
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
+
+# recuperar user_id
+def verify_user(username, password):
+    connection = db_connect()
+    if connection:
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT id FROM usuario WHERE username=%s AND password=%s", (username, password))
+        user = cursor.fetchone()  # Esto devuelve un diccionario con el id del usuario
+        connection.close()
+        return user['id'] if user else None
+    return None
+
+#ruta para mantener el login
+@app.route('/dashboard')
+def dashboard():
+    if 'user_id' in session:
+        # Realizar operaciones que requieran autenticación
+        return render_template('index_sesion_iniciada.html')
+    else:
+        return redirect(url_for('index_sesion_no_iniciada'))  # Redirige a una página de inicio de sesión si el usuario no está autenticado
+
 
 if __name__ == '__main__':
    app.run(debug=True)

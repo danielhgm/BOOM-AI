@@ -15,12 +15,6 @@ function showRegisterForm() {
   document.getElementById('crear_cuenta-frame').style.display = 'block';
 }
 
-// Función para ocultar el formulario de inicio de sesión
-function hideRegisterForm() {
-  document.getElementById('overlay_crear_cuenta').style.display = 'none';
-  document.getElementById('crear_cuenta-frame').style.display = 'none';
-}
-
 // Manejar clics en el documento para cerrar el formulario de inicio de sesión
 document.addEventListener('mousedown', function(event) {
   const registerForm = document.getElementById('crear_cuenta-frame');
