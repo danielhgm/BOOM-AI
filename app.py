@@ -30,17 +30,17 @@ def db_connect():
     try:
         connection = mysql.connector.connect(
             #bd dani
-            user='root',
-            password='Altima_2800',
-            host='localhost',
-            database='boomai',
-            port='3307'
-            #bd ivan
-            #user='virtualbox1',
+            #user='root',
             #password='Altima_2800',
-            #host='172.29.193.211',
+            #host='localhost',
             #database='boomai',
-            #port='3306'
+            #port='3307'
+            #bd ivan
+            user='virtualbox1',
+            password='Altima_2800',
+            host='172.29.193.211',
+            database='boomai',
+            port='3306'
         )
         if connection.is_connected():
             print("Conexión exitosa a la base de datos")
