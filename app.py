@@ -70,6 +70,12 @@ def tuempresa():
 def estancia():
     return render_template('estancia.html')
 
+#Ruta para dashboard chatgpt
+
+@app.route('/plantilla_dashboard')
+def plantilla_dashboard():
+    return render_template('servicios/plantilla_dashboard.html')
+
 #Ruta para ISR
 
 @app.route('/ISR')

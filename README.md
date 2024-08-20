@@ -32,3 +32,7 @@ Actualizo este readme para mencionar que con este commit tambien añadire los ca
 ## Dia 16 de agosto del 2024
 
 Ya cuando inicias sesion te redirige a otra pagina y esta constantemente actualizandose para verificar que seas tu, modularize en templates pero hace falta colocar en app.py las rutas, actualmente falta trabajar del login en el menu desplegable ya que se colisionan los diseños css
+
+## Dia 17 de agosto del 2024
+
+H

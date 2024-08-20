@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Deslizante con Imágenes Mejorado</title>
+    <style>
+        body {
+            
+
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alineación hacia la parte superior */
+            height: 100vh;
+            padding-top: 80px; /* Espacio para el navbar */
+        }
+
+        .menu-opciones-de-servicios-en-dashboard {
+            position: relative;
+            width: 100%; /* Ocupa todo el ancho */
+            max-width: 1200px; /* Ancho máximo del contenedor */
+            overflow: hidden;
+            background-color: #1e1e1e; /* Fondo del menú oscuro */
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4); /* Sombra cian */
+            border-radius: 10px;
+            margin-top: 20px; /* Espacio entre el menú y la parte superior */
+            padding: 0 50px; /* Espacio para los botones */
+            display: flex; /* Flexbox para los botones */
+            align-items: center; /* Alineación vertical */
+        }
+
+        .menu {
+            display: flex;
+            transition: transform 0.5s ease;
+            white-space: nowrap; /* Asegura que los items estén en una sola línea */
+            position: relative;
+            width: calc(100% * 2); /* Duplica el ancho para el efecto infinito */
+            overflow: hidden;
+        }
+
+        .menu-item {
+            display: inline-block;
+            min-width: 200px;
+            margin: 15px;
+            text-align: center;
+            color: #ffffff; /* Texto blanco */
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-item img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item h3 {
+            margin-top: 12px;
+            font-size: 18px;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.6); /* Sombra cian en hover */
+        }
+
+        .prev, .next {
+    background-color: rgba(0, 255, 255, 0.8); /* Botones color cian */
+    width: 50px; /* Ajusta el tamaño del botón */
+    height: 50px; /* Ajusta el tamaño del botón */
+    display: flex; /* Centra el contenido del botón */
+    align-items: center; /* Alinea verticalmente */
+    justify-content: center; /* Alinea horizontalmente */
+    border-radius: 50%;
+    left: 10px; /* Ajusta para que sea visible en el borde izquierdo */
+    right: 10px; /* Ajusta para que sea visible en el borde derecho */
+}
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 255, 255, 1); /* Más brillante en hover */
+            transform: scale(1.1);
+        }
+
+        .prev {
+            left: -60px; /* Espacio desde el borde izquierdo */
+        }
+
+        .next {
+            right: -60px; /* Espacio desde el borde derecho */
+        }
+
+        .show-menu {
+    position: absolute;
+    bottom: 20px; /* Ajustado para estar más arriba en comparación con el borde inferior del menú desplegable */
+    right: 20px;
+    background-color: rgba(0, 255, 255, 0.8); /* Botón cian */
+    color: #121212; /* Texto oscuro */
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3); /* Sombra cian */
+    z-index: 1; /* Asegura que el botón esté debajo del menú desplegable */
+}
+
+
+
+        .show-menu:hover {
+            background-color: rgba(0, 255, 255, 1); /* Más brillante en hover */
+            transform: scale(1.1);
+        }
+
+        .dropdown-menu-desplegable {
+    display: none;
+    position: fixed; /* Cambiado a fixed para cubrir toda la pantalla */
+    top: 20px; /* Margen desde el borde superior */
+    left: 20px; /* Margen desde el borde izquierdo */
+    right: 20px; /* Margen desde el borde derecho */
+    bottom: 20px; /* Margen desde el borde inferior */
+    background-color: #1e1e1e; /* Fondo oscuro */
+    box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4); /* Sombra cian */
+    border-radius: 15px; /* Bordes circulares */
+    padding: 20px;
+    color: #ffffff; /* Texto blanco */
+    overflow: auto; /* Permite el desplazamiento si el contenido es grande */
+    opacity: 1; /* Totalmente opaco */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0); /* Inicialmente oculto */
+    transform-origin: center; /* Anima desde el centro */
+}
+
+.dropdown-menu-desplegable.show {
+    display: block;
+    opacity: 1;
+    transform: scale(1); /* Muestra el dropdown con animación */
+}
+
+.dropdown-menu-desplegable {
+    padding: 30px; /* Aumenta el padding para mayor espacio interno */
+}
+
+
+.dropdown-menu-desplegable ul {
+    display: flex;
+    flex-wrap: wrap; /* Permite el flujo de contenido en múltiples filas */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu-desplegable li {
+    flex: 0 0 20%; /* Cada opción ocupa el 20% del ancho */
+    box-sizing: border-box; /* Incluye el padding y border en el ancho */
+    padding: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu-desplegable li:hover {
+    background-color: rgba(0, 255, 255, 0.2); /* Fondo cian claro en hover */
+}
+
+.dropdown-menu-desplegable li a {
+    display: block;
+    color: #ffffff; /* Texto blanco */
+    text-decoration: none;
+    text-align: center; /* Centra el texto y la imagen */
+}
+
+.dropdown-menu-desplegable li a img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 5px; /* Espacio entre imagen y texto */
+}
+
+.close-dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 255, 255, 0.8); /* Botón cian */
+    color: #121212; /* Texto oscuro */
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 255, 255, 0.3); /* Sombra cian */
+    z-index: 10; /* Asegura que el botón esté encima del contenido del menú */
+}
+
+.close-dropdown:hover {
+    background-color: rgba(0, 255, 255, 1); /* Más brillante en hover */
+    transform: scale(1.1);
+}
+
+    </style>
+</head>
+<body>
+    <div class="menu-opciones-de-servicios-en-dashboard">
+        <button class="prev" onclick="scrollMenu(-1)">&#10094;</button>
+        <div class="menu" id="menu">
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 1">
+                <h3>Opción 1</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 2">
+                <h3>Opción 2</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 3">
+                <h3>Opción 3</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 4">
+                <h3>Opción 4</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 5">
+                <h3>Opción 5</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 6">
+                <h3>Opción 6</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 7">
+                <h3>Opción 7</h3>
+            </div>
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 8">
+                <h3>Opción 8</h3>
+            </div>
+            <!-- Copia de las opciones para el efecto infinito -->
+            <div class="menu-item">
+                <img src="https://via.placeholder.com/150" alt="Item 1">
+                <h3>Opción 1</h3>
+            </div>
+        </div>
+        <button class="next" onclick="scrollMenu(1)">&#10095;</button>
+        <button class="show-menu" onclick="toggleDropdown()">Mostrar Opciones</button>
+        <div class="dropdown-menu-desplegable" id="dropdown-menu">
+            <button class="close-dropdown" onclick="toggleDropdown()">&#10006;</button>
+            <ul>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 1">Opción 1</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 2">Opción 2</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 3">Opción 3</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 4">Opción 4</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 5">Opción 5</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 6">Opción 6</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 7">Opción 7</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 8">Opción 8</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 9">Opción 9</a></li>
+                <li><a href="#"><img src="https://via.placeholder.com/150" alt="Item 10">Opción 10</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        let scrollAmount = 0;
+        const menu = document.getElementById('menu');
+        const menuItemWidth = document.querySelector('.menu-item').offsetWidth + 30; // Incluye margen
+
+        function scrollMenu(direction) {
+            scrollAmount += direction * menuItemWidth;
+            menu.style.transform = `translateX(${scrollAmount}px)`;
+        }
+
+        // JavaScript para el botón de cerrar
+function toggleDropdown() {
+    const dropdown = document.getElementById('dropdown-menu');
+    dropdown.classList.toggle('show');
+}
+
+        // Auto-scroll
+        setInterval(() => {
+            scrollMenu(1);
+            if (Math.abs(scrollAmount) >= menu.scrollWidth / 2) {
+                scrollAmount = 0; // Resetea el scroll al volver al inicio
+                menu.style.transform = `translateX(${scrollAmount}px)`;
+            }
+        }, 3000); // Ajusta el intervalo según necesites
+    </script>
+</body>
+</html>
