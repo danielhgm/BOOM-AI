@@ -47,24 +47,24 @@
     <table>
         <thead>
             <tr>
-                <th>ID Proveedor</th>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
+                <th>ID</th>
+                <th>Descripcion</th>
+                <th>Monto</th>
+                <th>Fecha</th>
             </tr>
         </thead>
         <tbody>
-            {% for proveedor in proveedores %}
+            {% for gasto in gastos %}
             <tr>
-                <td>{{ proveedor[0] }}</td>
-                <td>{{ proveedor[1] }}</td>
-                <td>{{ proveedor[2] }}</td>
-                <td>{{ proveedor[3] }}</td>
+                <td>{{ gasto[0] }}</td>
+                <td>{{ gasto[1] }}</td>
+                <td>{{ gasto[2] }}</td>
+                <td>{{ gasto[3] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ url_for('proveedores.mostrar_formulario') }}" class="btn">Registrar Proveedor</a>
+    <a href="{{ url_for('gastos.mostrar_formulario') }}" class="btn">Registrar Gastos</a>
 </body>
 </html>
